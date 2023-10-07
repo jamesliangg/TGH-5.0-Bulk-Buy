@@ -1,5 +1,5 @@
 import {mongoQueryOne, mongoInsertOne, mongoQueryMultiple, mongoUpdateOne} from "./mongo.js";
-import {redis_get, redis_hSet, redis_hGet} from "./redisdb.js";
+import {redis_get, redis_hSet, redis_hGet, redis_hGetAll} from "./redisdb.js";
 import express from 'express';
 const app = express();
 import bodyParser from "body-parser";
@@ -124,9 +124,8 @@ app.post('/api/ingredients', async function (req, res) {
     switch(action) {
         case("get"):
             try {
-                const uid = req.body.uid;
-                const field = req.body.field;
-                result = await redis_get(uid, field);
+                const ingredient = req.body.ingredient;
+                result = await redis_hGetAll(ingredient);
             }
             catch(err) {
                 console.log(err.message);
@@ -134,9 +133,18 @@ app.post('/api/ingredients', async function (req, res) {
             break;
         case("set"):
             try {
-                const uid = req.body.uid;
-                const info = req.body.info;
-                result = await redis_set(uid, info);
+                const ingredient = req.body.ingredient;
+                const price = req.body.price;
+                const unit = req.body.unit;
+                const threshold = req.body.threshold;
+                const retailer = req.body.retailer;
+                const value = {
+                    price: price,
+                    unit: unit,
+                    threshold: threshold,
+                    retailer: retailer
+                }
+                result = await redis_hSet(ingredient, value);
             }
             catch(err) {
                 console.log(err.message);

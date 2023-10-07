@@ -64,3 +64,18 @@ export async function redis_hSet(key, value) {
     await client.disconnect();
     return response;
 }
+
+// https://redis.io/commands/hgetall/
+export async function redis_hGetAll(key) {
+    const client = createClient({
+        password: password,
+        socket: {
+            host: host,
+            port: port
+        }
+    });
+    await client.connect();
+    const value = await client.hGetAll(key);
+    await client.disconnect();
+    return value;
+}

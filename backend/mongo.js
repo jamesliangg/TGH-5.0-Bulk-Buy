@@ -1,5 +1,5 @@
 import {MongoClient} from "mongodb";
-import 'dotenv/config'
+import 'dotenv/config';
 
 const uri = process.env.MONGO_CONNECT_STRING;
 const mongoDatabase = process.env.MONGO_DATABASE;

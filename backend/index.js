@@ -55,6 +55,8 @@ app.post('/api/request', async function (req, res) {
 
 app.post('/api/auth', async function (req, res) {
     const data = req.body;
+    let uid = "";
+    let pwd = "";
     const action = req.body.action;
     console.log(req.ip);
     let today = new Date();
@@ -68,9 +70,9 @@ app.post('/api/auth', async function (req, res) {
     switch(action) {
         case("get"):
             try {
-                const uid = req.body.uid;
-                const pwd = req.body.pwd;
-                result = await redis_hGet(uid, "password");
+                uid = req.body.uid;
+                pwd = req.body.pwd;
+                result = await redis_hGet(uid, "pwd");
                 if (result == pwd) {
                     result = await redis_hGet(uid, "name");
                 }
@@ -84,13 +86,14 @@ app.post('/api/auth', async function (req, res) {
             break;
         case("set"):
             try {
-                const uid = req.body.uid;
-                const pwd = req.body.pwd;
+                uid = req.body.uid;
+                pwd = req.body.pwd;
+                const name = req.body.name;
                 const value = {
-                    pwd: pwd,
-                    name: req.body.name
+                    name: name,
+                    pwd: pwd
                 }
-                console.log(value);
+                // https://stackoverflow.com/questions/59352905/how-can-store-a-json-in-redis-with-hashmap-hset
                 result = await redis_hSet(uid, value);
             }
             catch(err) {

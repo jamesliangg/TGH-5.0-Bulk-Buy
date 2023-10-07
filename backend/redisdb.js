@@ -61,12 +61,6 @@ export async function redis_hSet(key, value) {
     });
     await client.connect();
     const response = await client.hSet(key, value);
-    // const response = await client.hSet('user-session:123', {
-    //     name: 'John',
-    //     surname: 'Smith',
-    //     company: 'Redis',
-    //     age: 29
-    // });
     await client.disconnect();
     return response;
 }

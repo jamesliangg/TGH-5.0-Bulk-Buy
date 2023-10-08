@@ -36,6 +36,9 @@ const pastOrdersPassword = process.env.PASTORDERS_REDIS_PASSWORD;
 const pastOrdersHost = process.env.PASTORDERS_REDIS_HOST;
 const pastOrdersPort = process.env.PASTORDERS_REDIS_PORT;
 
+const requestCollection = process.env.MONGO_COLLECTION_REQUEST;
+const orderCollection = process.env.MONGO_COLLECTION_ORDER;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -244,6 +247,99 @@ app.post('/api/pastOrders', async function (req, res) {
     console.log(response);
     res.send(response);
 });
+
+app.post("/api/request", async function (req, res) {
+    const data = req.body;
+    const action = req.body.action;
+    console.log(req.ip);
+    let today = new Date();
+    let date =
+        today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    let time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    console.log(dateTime);
+    console.log("Received data: ", data);
+    let response = "No action received.";
+    let result = "";
+    switch (action) {
+        case "get":
+            try {
+                const uid = req.body.uid;
+                result = await mongoQueryOne("uid", uid, requestCollection);
+            } catch (err) {
+                console.log(err.message);
+            }
+            break;
+        case "set":
+            try {
+                const uid = req.body.uid;
+                const duplicate = await mongoQueryOne("uid", uid, requestCollection);
+                if (duplicate != null) {
+                    result = await mongoUpdateOne("uid", uid, data, requestCollection);
+                }
+                else {
+                    result = await mongoInsertOne(data, requestCollection);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+            break;
+    }
+
+    response = JSON.stringify({
+        result: result,
+    });
+    console.log(response);
+    res.send(response);
+});
+
+app.post("/api/order", async function (req, res) {
+    const data = req.body;
+    const action = req.body.action;
+    console.log(req.ip);
+    let today = new Date();
+    let date =
+        today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    let time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    console.log(dateTime);
+    console.log("Received data: ", data);
+    let response = "No action received.";
+    let result = "";
+    switch (action) {
+        case "get":
+            try {
+                const uid = req.body.uid;
+                result = await mongoQueryOne("uid", uid, orderCollection);
+            } catch (err) {
+                console.log(err.message);
+            }
+            break;
+        case "set":
+            try {
+                const oid = req.body.oid;
+                const duplicate = await mongoQueryOne("oid", oid, orderCollection);
+                if (duplicate != null) {
+                    result = await mongoUpdateOne("oid", oid, data, orderCollection);
+                }
+                else {
+                    result = await mongoInsertOne(data, requestCollection);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+            break;
+    }
+
+    response = JSON.stringify({
+        result: result,
+    });
+    console.log(response);
+    res.send(response);
+});
+
 
 app.listen(3000, function() {
     console.log('Server listening at http://CONTAINER_IP_ADDRESS:' + port +'/api/endpoint');

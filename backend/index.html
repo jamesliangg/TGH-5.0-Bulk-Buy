@@ -796,6 +796,84 @@
     }
   }
 };
+            defs["pastorders"] = {
+  "required" : [ "action", "ingredient" ],
+  "type" : "object",
+  "properties" : {
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "uid" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "orders" : {
+      "type" : "array",
+      "format" : "retailer",
+      "example" : [ "2139", "3412", "4412" ],
+      "items" : {
+        "type" : "string"
+      }
+    }
+  }
+};
+            defs["pastordersResponse"] = {
+  "required" : [ "result" ],
+  "type" : "object",
+  "properties" : {
+    "results" : {
+      "type" : "array",
+      "format" : "result",
+      "example" : [ "4412", "3412", "2139" ],
+      "items" : {
+        "type" : "string"
+      }
+    }
+  }
+};
+            defs["quantity"] = {
+  "required" : [ "action", "item" ],
+  "type" : "object",
+  "properties" : {
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "item" : {
+      "$ref" : "#/components/schemas/quantityBody"
+    }
+  }
+};
+            defs["quantityBody"] = {
+  "required" : [ "item" ],
+  "type" : "object",
+  "properties" : {
+    "egg" : {
+      "type" : "string",
+      "format" : "price",
+      "example" : "170"
+    },
+    "muffin" : {
+      "type" : "string",
+      "format" : "price",
+      "example" : "3"
+    }
+  }
+};
+            defs["quantityResponse"] = {
+  "required" : [ "result" ],
+  "type" : "object",
+  "properties" : {
+    "results" : {
+      "type" : "string",
+      "format" : "result",
+      "example" : "170"
+    }
+  }
+};
   </script>
 
   <div class="container-fluid">
@@ -818,6 +896,12 @@
                     </li>
                     <li data-group="Default" data-name="ingredients" class="">
                       <a href="#api-Default-ingredients">ingredients</a>
+                    </li>
+                    <li data-group="Default" data-name="pastorders" class="">
+                      <a href="#api-Default-pastorders">pastorders</a>
+                    </li>
+                    <li data-group="Default" data-name="quantity" class="">
+                      <a href="#api-Default-quantity">quantity</a>
                     </li>
           </ul>
         </nav>
@@ -1458,6 +1542,630 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-ingredients-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-pastorders">
+                      <article id="api-Default-pastorders-0" data-group="User" data-name="pastorders" data-version="0">
+                        <div class="pull-left">
+                          <h1>pastorders</h1>
+                          <p>access past orders of users</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Retrieve or add to user orders</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/pastorders</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-pastorders-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-pastorders-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-pastorders-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-pastorders-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-pastorders-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-pastorders-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-pastorders-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"http://127.0.0.1:3000/api//pastorders"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-pastorders-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        Pastorders body = ; // Pastorders | Example schema for adding to past orders
+        try {
+            pastordersResponse result = apiInstance.pastorders(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#pastorders");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-pastorders-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Pastorders body = ; // Pastorders | Example schema for adding to past orders
+        try {
+            pastordersResponse result = apiInstance.pastorders(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#pastorders");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-pastorders-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-pastorders-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Pastorders *body = ; // Example schema for adding to past orders (optional)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// access past orders of users
+[apiInstance pastordersWith:body
+              completionHandler: ^(pastordersResponse output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pastorders-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BulkBuyApiDocumentation = require('bulk_buy_api_documentation');
+
+var api = new BulkBuyApiDocumentation.DefaultApi()
+var opts = { 
+  'body':  // {{Pastorders}} Example schema for adding to past orders
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.pastorders(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-pastorders-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-pastorders-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class pastordersExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new Pastorders(); // Pastorders | Example schema for adding to past orders (optional) 
+
+            try
+            {
+                // access past orders of users
+                pastordersResponse result = apiInstance.pastorders(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.pastorders: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pastorders-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // Pastorders | Example schema for adding to past orders
+
+try {
+    $result = $api_instance->pastorders($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->pastorders: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pastorders-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::Pastorders->new(); # Pastorders | Example schema for adding to past orders
+
+eval { 
+    my $result = $api_instance->pastorders(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->pastorders: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-pastorders-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # Pastorders | Example schema for adding to past orders (optional)
+
+try: 
+    # access past orders of users
+    api_response = api_instance.pastorders(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->pastorders: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Example schema for adding to past orders",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/pastorders"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_pastorders_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_pastorders_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - request was received and processed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pastorders-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pastorders-200-schema">
+                                  <div id='responses-pastorders-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "request was received and processed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/pastordersResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pastorders-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pastorders-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pastorders-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-quantity">
+                      <article id="api-Default-quantity-0" data-group="User" data-name="quantity" data-version="0">
+                        <div class="pull-left">
+                          <h1>quantity</h1>
+                          <p>access current requested ingredient count</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Retrieve or add to requested ingredient count</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/quantity</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-quantity-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-quantity-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-quantity-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-quantity-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-quantity-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-quantity-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-quantity-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"http://127.0.0.1:3000/api//quantity"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-quantity-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        Quantity body = ; // Quantity | Example schema for setting quantity
+        try {
+            quantityResponse result = apiInstance.quantity(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#quantity");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-quantity-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Quantity body = ; // Quantity | Example schema for setting quantity
+        try {
+            quantityResponse result = apiInstance.quantity(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#quantity");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-quantity-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-quantity-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Quantity *body = ; // Example schema for setting quantity (optional)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// access current requested ingredient count
+[apiInstance quantityWith:body
+              completionHandler: ^(quantityResponse output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-quantity-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BulkBuyApiDocumentation = require('bulk_buy_api_documentation');
+
+var api = new BulkBuyApiDocumentation.DefaultApi()
+var opts = { 
+  'body':  // {{Quantity}} Example schema for setting quantity
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.quantity(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-quantity-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-quantity-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class quantityExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new Quantity(); // Quantity | Example schema for setting quantity (optional) 
+
+            try
+            {
+                // access current requested ingredient count
+                quantityResponse result = apiInstance.quantity(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.quantity: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-quantity-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // Quantity | Example schema for setting quantity
+
+try {
+    $result = $api_instance->quantity($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->quantity: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-quantity-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::Quantity->new(); # Quantity | Example schema for setting quantity
+
+eval { 
+    my $result = $api_instance->quantity(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->quantity: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-quantity-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # Quantity | Example schema for setting quantity (optional)
+
+try: 
+    # access current requested ingredient count
+    api_response = api_instance.quantity(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->quantity: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Example schema for setting quantity",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/quantity"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_quantity_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_quantity_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - request was received and processed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-quantity-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-quantity-200-schema">
+                                  <div id='responses-quantity-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "request was received and processed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/quantityResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-quantity-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-quantity-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-quantity-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

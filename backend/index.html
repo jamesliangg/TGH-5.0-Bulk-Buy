@@ -796,6 +796,115 @@
     }
   }
 };
+            defs["order"] = {
+  "required" : [ "action", "item" ],
+  "type" : "object",
+  "properties" : {
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "oid" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "item" : {
+      "$ref" : "#/components/schemas/orderBody"
+    },
+    "order_date" : {
+      "type" : "string",
+      "format" : "time-date",
+      "example" : "2023-10-06T00:00:00.000Z"
+    },
+    "fulfill_date" : {
+      "type" : "string",
+      "format" : "time-date",
+      "example" : "2023-10-08T00:00:00.000Z"
+    },
+    "price" : {
+      "type" : "string",
+      "format" : "price",
+      "example" : "27.50"
+    }
+  }
+};
+            defs["orderBody"] = {
+  "type" : "object",
+  "properties" : {
+    "egg" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "25"
+    },
+    "muffin" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "3"
+    }
+  }
+};
+            defs["orderResponse"] = {
+  "required" : [ "result" ],
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "$ref" : "#/components/schemas/orderResults"
+    }
+  }
+};
+            defs["orderResults"] = {
+  "required" : [ "price", "retailer", "threshold", "unit" ],
+  "type" : "object",
+  "properties" : {
+    "_id" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "oid" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "ingredients" : {
+      "$ref" : "#/components/schemas/orderResultsIngredients"
+    },
+    "order_date" : {
+      "type" : "string",
+      "format" : "time-date",
+      "example" : "2023-10-06T00:00:00.000Z"
+    },
+    "fulfill_date" : {
+      "type" : "string",
+      "format" : "time-date",
+      "example" : "2023-10-08T00:00:00.000Z"
+    },
+    "price" : {
+      "type" : "string",
+      "format" : "price",
+      "example" : "27.50"
+    }
+  }
+};
+            defs["orderResultsIngredients"] = {
+  "type" : "object",
+  "properties" : {
+    "egg" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "24"
+    },
+    "muffin" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "2"
+    }
+  }
+};
             defs["pastorders"] = {
   "required" : [ "action", "ingredient" ],
   "type" : "object",
@@ -874,6 +983,95 @@
     }
   }
 };
+            defs["request"] = {
+  "required" : [ "action", "item" ],
+  "type" : "object",
+  "properties" : {
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "uid" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "item" : {
+      "$ref" : "#/components/schemas/requestBody"
+    }
+  }
+};
+            defs["requestBody"] = {
+  "type" : "object",
+  "properties" : {
+    "egg" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "20"
+    },
+    "milk" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "2"
+    },
+    "apple" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "3"
+    },
+    "muffin" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "1"
+    }
+  }
+};
+            defs["requestResponse"] = {
+  "required" : [ "result" ],
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "$ref" : "#/components/schemas/requestResults"
+    }
+  }
+};
+            defs["requestResults"] = {
+  "required" : [ "price", "retailer", "threshold", "unit" ],
+  "type" : "object",
+  "properties" : {
+    "_id" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "action" : {
+      "type" : "string",
+      "format" : "action",
+      "example" : "set"
+    },
+    "uid" : {
+      "type" : "string",
+      "format" : "uuid"
+    },
+    "ingredients" : {
+      "$ref" : "#/components/schemas/requestResultsIngredients"
+    }
+  }
+};
+            defs["requestResultsIngredients"] = {
+  "type" : "object",
+  "properties" : {
+    "egg" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "20"
+    },
+    "apple" : {
+      "type" : "string",
+      "format" : "unit",
+      "example" : "3"
+    }
+  }
+};
   </script>
 
   <div class="container-fluid">
@@ -897,11 +1095,17 @@
                     <li data-group="Default" data-name="ingredients" class="">
                       <a href="#api-Default-ingredients">ingredients</a>
                     </li>
+                    <li data-group="Default" data-name="order" class="">
+                      <a href="#api-Default-order">order</a>
+                    </li>
                     <li data-group="Default" data-name="pastorders" class="">
                       <a href="#api-Default-pastorders">pastorders</a>
                     </li>
                     <li data-group="Default" data-name="quantity" class="">
                       <a href="#api-Default-quantity">quantity</a>
+                    </li>
+                    <li data-group="Default" data-name="request" class="">
+                      <a href="#api-Default-request">request</a>
                     </li>
           </ul>
         </nav>
@@ -959,7 +1163,7 @@
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"http://127.0.0.1:3000/api//auth"</code></pre>
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/auth"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-auth-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1271,7 +1475,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"http://127.0.0.1:3000/api//ingredients"</code></pre>
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/ingredients"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-ingredients-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1548,6 +1752,318 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-Default-order">
+                      <article id="api-Default-order-0" data-group="User" data-name="order" data-version="0">
+                        <div class="pull-left">
+                          <h1>order</h1>
+                          <p>access orders</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Retrieve or add to order list</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/order</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-order-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-order-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-order-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-order-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-order-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-order-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-order-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-order-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-order-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-order-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-order-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-order-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/order"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-order-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        Order body = ; // Order | Example schema for adding to order list
+        try {
+            orderResponse result = apiInstance.order(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#order");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-order-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Order body = ; // Order | Example schema for adding to order list
+        try {
+            orderResponse result = apiInstance.order(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#order");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-order-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-order-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Order *body = ; // Example schema for adding to order list (optional)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// access orders
+[apiInstance orderWith:body
+              completionHandler: ^(orderResponse output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-order-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BulkBuyApiDocumentation = require('bulk_buy_api_documentation');
+
+var api = new BulkBuyApiDocumentation.DefaultApi()
+var opts = { 
+  'body':  // {{Order}} Example schema for adding to order list
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.order(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-order-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-order-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class orderExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new Order(); // Order | Example schema for adding to order list (optional) 
+
+            try
+            {
+                // access orders
+                orderResponse result = apiInstance.order(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.order: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-order-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // Order | Example schema for adding to order list
+
+try {
+    $result = $api_instance->order($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->order: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-order-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::Order->new(); # Order | Example schema for adding to order list
+
+eval { 
+    my $result = $api_instance->order(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->order: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-order-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # Order | Example schema for adding to order list (optional)
+
+try: 
+    # access orders
+    api_response = api_instance.order(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->order: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Example schema for adding to order list",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/order"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_order_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_order_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - request was received and processed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-order-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-order-200-schema">
+                                  <div id='responses-order-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "request was received and processed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/orderResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-order-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-order-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-order-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Default-pastorders">
                       <article id="api-Default-pastorders-0" data-group="User" data-name="pastorders" data-version="0">
                         <div class="pull-left">
@@ -1583,7 +2099,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"http://127.0.0.1:3000/api//pastorders"</code></pre>
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/pastorders"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-pastorders-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1895,7 +2411,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"http://127.0.0.1:3000/api//quantity"</code></pre>
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/quantity"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-quantity-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2166,6 +2682,318 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-quantity-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-request">
+                      <article id="api-Default-request-0" data-group="User" data-name="request" data-version="0">
+                        <div class="pull-left">
+                          <h1>request</h1>
+                          <p>access user requests</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Retrieve or add to user requests</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/request</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-request-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-request-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-request-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-request-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-request-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-request-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-request-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-request-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-request-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-request-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-request-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-request-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"https://virtserver.swaggerhub.com/SWAGGERDOC/HGT5/1.0.0/request"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-request-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        Request body = ; // Request | Example schema for adding to received requests
+        try {
+            requestResponse result = apiInstance.request(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#request");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-request-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Request body = ; // Request | Example schema for adding to received requests
+        try {
+            requestResponse result = apiInstance.request(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#request");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-request-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-request-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Request *body = ; // Example schema for adding to received requests (optional)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+// access user requests
+[apiInstance requestWith:body
+              completionHandler: ^(requestResponse output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-request-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BulkBuyApiDocumentation = require('bulk_buy_api_documentation');
+
+var api = new BulkBuyApiDocumentation.DefaultApi()
+var opts = { 
+  'body':  // {{Request}} Example schema for adding to received requests
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.request(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-request-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-request-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class requestExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new Request(); // Request | Example schema for adding to received requests (optional) 
+
+            try
+            {
+                // access user requests
+                requestResponse result = apiInstance.request(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.request: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-request-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // Request | Example schema for adding to received requests
+
+try {
+    $result = $api_instance->request($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->request: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-request-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::Request->new(); # Request | Example schema for adding to received requests
+
+eval { 
+    my $result = $api_instance->request(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->request: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-request-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # Request | Example schema for adding to received requests (optional)
+
+try: 
+    # access user requests
+    api_response = api_instance.request(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->request: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body </td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Example schema for adding to received requests",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/request"
+      }
+    }
+  }
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_request_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_request_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - request was received and processed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-request-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-request-200-schema">
+                                  <div id='responses-request-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "request was received and processed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/requestResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-request-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-request-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-request-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

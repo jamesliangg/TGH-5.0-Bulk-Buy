@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="../../assets/vendor/slick-carousel/slick/slick.css"
+    />
+  </head>
+  <%- include('layouts/header'); -%>
+
+  <body id="page-top" style="background-color: black; background-image: none">
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+    <!-- Header-->
+    <header class="masthead text-center text-white">
+      <div class="masthead-content">
+        <div class="container px-5">
+          <h1 class="masthead-heading mb-0">Available Items</h1>
+        </div>
+      </div>
+    </header>
+    <div
+      class="js-slick-carousel u-slick u-slick--gutters-3 u-slick--equal-height"
+      data-slides-show="4"
+      data-slides-scroll="3"
+      data-infinite="true"
+      data-pagi-classes="text-center u-slick__pagination mt-7 mb-0"
+      data-responsive='[{
+       "breakpoint": 992,
+       "settings": {
+         "slidesToShow": 3
+       }
+     }, {
+       "breakpoint": 720,
+       "settings": {
+         "slidesToShow": 2
+       }
+     }, {
+       "breakpoint": 480,
+       "settings": {
+         "slidesToShow": 1
+       }
+     }]'
+    >
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/bread.png"
+              alt="Image Description"
+            />
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Baked Goods</a
+              >
+              <h3 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Loaf of bread </a>
+              </h3>
+              <div class="d-block font-size-1">
+                <span class="font-weight-medium">$0.80</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">0</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/eggs.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Dairy & Poultry</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Eggs (per dozen)</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">$0.55</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">40</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/milk.png"
+              alt="Image Description"
+            />
+            <div class="position-absolute top-0 left-0 pt-3 pl-3"></div>
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Dairy &amp; Poultry</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Milk (per one milk bag) </a>
+              </h4>
+              <div class="d-block font-size-1">
+                <span class="font-weight-medium">$2.89</span>
+                <span class="text-secondary ml-1"><del>$4.99</del></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">125</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/ziploc.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Other</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Ziplocs</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">$0.20</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                </div>
+                <span class="text-secondary">9</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/soap.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Fruits</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Soap</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">0.99</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">31</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/c.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 left-0 pt-3 pl-3"></div>
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Baked Goods</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Cookies (Per cookie bag)</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">$0.99</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">0</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/nuts.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Fruits</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Nuts (per 100 grams)</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">$0.50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                  <small class="far fa-star text-muted"></small>
+                </div>
+                <span class="text-secondary">0</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+
+      <div class="js-slide">
+        <!-- Product -->
+        <div class="card text-center w-100">
+          <div class="position-relative">
+            <img
+              class="card-img-top"
+              src="../../img/b.png"
+              alt="Image Description"
+            />
+
+            <div class="position-absolute top-0 right-0 pt-3 pr-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-icon btn-outline-secondary rounded-circle"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save for later"
+              >
+                <span class="fas fa-heart btn-icon__inner"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 px-4 pb-0">
+            <div class="mb-2">
+              <a
+                class="d-inline-block text-secondary small font-weight-medium mb-1"
+                href="#"
+                >Dairy & Poultry</a
+              >
+              <h4 class="font-size-1 font-weight-normal">
+                <a class="text-secondary" href="#">Greek Yogurt</a>
+              </h4>
+              <div class="d-block">
+                <span class="font-weight-medium">$0.99</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer border-0 pt-0 pb-4 px-4">
+            <div class="mb-3">
+              <a class="d-inline-flex align-items-center small" href="#">
+                <div class="text-warning mr-2">
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                  <small class="fas fa-star"></small>
+                </div>
+                <span class="text-secondary">2</span>
+              </a>
+            </div>
+            <button type="button" class="ver">Add to Cart</button>
+          </div>
+        </div>
+        <!-- End Product -->
+      </div>
+    </div>
+    <!-- JS Implementing Plugins -->
+    <script src="../../assets/vendor/slick-carousel/slick/slick.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="../../assets/js/components/hs.slick-carousel.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+      $(document).on("ready", function () {
+        // initialization of slick carousel
+        $.HSCore.components.HSSlickCarousel.init(".js-slick-carousel");
+      });
+    </script>
+
+    <!-- Footer-->
+    <%- include('layouts/footer'); -%>
+    <!-- Scripts-->
+    <%- include('layouts/scripts'); -%>
+    <script type="text/javascript">
+      (function (d, t) {
+        var v = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+        v.onload = function () {
+          window.voiceflow.chat.load({
+            verify: { projectID: "65219ae48d2bac00071cea19" },
+            url: "https://general-runtime.voiceflow.com",
+            versionID: "production",
+          });
+        };
+        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+        v.type = "text/javascript";
+        s.parentNode.insertBefore(v, s);
+      })(document, "script");
+    </script>
+  </body>
+</html>

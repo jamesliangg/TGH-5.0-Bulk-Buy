@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header-->
+<%- include('layouts/header'); -%>
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Page Header-->
+            <header class="masthead text-center text-white">
+                <div class="masthead-content">
+                    <h1 class="masthead-heading mb-0">Login</h1>
+                </div>
+                </div>
+                <div class="bg-circle-1 bg-circle"></div>
+                <div class="bg-circle-2 bg-circle"></div>
+                <div class="bg-circle-3 bg-circle"></div>
+                <div class="bg-circle-4 bg-circle"></div>
+            </header>
+            <h2 id="error"></h2>
+
+            <div class="form-container">
+                <div class="form-wrapper">
+                    <form action="/complete-login" method="POST">
+                        <h2>Login</h2>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username"><br><br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password"><br><br>                        
+                        <button type="submit">Login</button>
+                    </form>
+                    <h2>New here?</h2>
+                    <h2><a href="signup">Sign up here!</a></h2>
+                </div>
+
+            </div>
+
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <!-- Scripts-->
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>

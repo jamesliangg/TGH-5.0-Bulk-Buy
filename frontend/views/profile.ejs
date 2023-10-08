@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Header-->
+<%- include('layouts/header'); -%>
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Header-->
+            <header class="masthead text-center text-white">
+                <div class="masthead-content">
+                    <div class="container px-5">
+                        <h1 class="masthead-heading mb-0">G license test</h1>
+                        <h2 class="masthead-subheading mb-0">Apply for the test now!</h2>
+                        <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+                    </div>
+                </div>
+                <div class="bg-circle-1 bg-circle"></div>
+                <div class="bg-circle-2 bg-circle"></div>
+                <div class="bg-circle-3 bg-circle"></div>
+                <div class="bg-circle-4 bg-circle"></div>
+            </header>
+
+            <body>
+
+                <% console.log(user); %>
+                    <% if(typeof user.license_number==='undefined' ){ %>
+                        <h1 style="color: white;text-align: center;">Please fill G2 form! Redirecting...</h1>
+                        <meta http-equiv="refresh" content="3; '/g2-test'" />
+                        <% }else{ %>
+                            <div id="user">
+                                <form method="POST" action="/update">
+                                    <h1>User Profile</h1>
+
+                                    <p class="user-profile"><strong>First Name:</strong>
+                                        <input type="text" value="<%= user.first_name %>" readonly id="first_name"
+                                            name="first_name">
+                                    </p>
+                                    <p class="user-profile"><strong>Last Name:</strong>
+                                        <input type="text" value="<%= user.last_name %>" readonly id="last_name"
+                                            name="last_name">
+                                    </p>
+                                    <p class="user-profile"><strong>License Number:</strong>
+                                        <input type="text" value="<%= user.license_number %>" readonly
+                                            id="license_number" name="license_number">
+                                    </p>
+                                    <p class="user-profile"><strong>Phone:</strong>
+                                        <input type="tel" value="<%= user.phone %>" readonly id="phone" name="phone">
+                                    </p>
+                                    <p class="user-profile">
+                                        <strong>Date of Birth:</strong>
+                                        <%= (new Date(user.dob).toLocaleDateString()); %>
+                                    </p>
+                                    <fieldset>
+                                        <h1>Car Details</h1>
+                                        <p class="user-profile"><strong>Make:</strong>
+                                            <input type="text" value="<%= user.make %>" id="make" name="make" required>
+                                        </p>
+                                        <p class="user-profile"><strong>Model:</strong>
+                                            <input type="text" value="<%= user.model %>" id="model" name="model"
+                                                required>
+
+                                        </p>
+                                        <p class="user-profile"><strong>Year:</strong>
+                                            <input type="text" value="<%= user.year %>" id="year" name="year" required>
+
+                                        </p>
+                                        <p class="user-profile"><strong>Plate Number:</strong>
+                                            <input type="text" value="<%= user.plate_number %>" id="plate_number"
+                                                name="plate_number" required>
+                                        </p>
+                                    </fieldset>
+                                    <input type="submit" value="Submit Request">
+                                </form>
+                            </div>
+                            <% } %>
+
+            </body>
+
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <!-- Scripts-->
+                <%- include('layouts/scripts'); -%>
+
+    </body>
+
+</html>

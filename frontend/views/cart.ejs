@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body id="page-top" style="background-color: rgb(255, 255, 255); background-image: none;">
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Header-->
+            <header class="masthead text-center text-white x">
+                <div class="masthead-content">
+                    <div class="container px-5">
+                        <h1 class="masthead-heading mb-0 x">Checkout</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="item">
+                <div class="buttons">
+                    <span class="delete-btn">
+                        <!-- <img src="./../../img/delete-icn.svg" alt="Eggs" width="100px" height="80%" /> -->
+                    </span>
+                    <!-- <span class="like-btn"> -->
+                        <!-- <img src="./../../img/twitter-heart.png" alt="Eggs" height="80%" /> -->
+                    <!-- </span> -->
+                </div>
+
+                <div class="image">
+                    <img src="./../../img/eggs.png" alt="Eggs" width="100px" height="80%" />
+                </div>
+
+                <div class="description">
+                    <span>Large White</span>
+                    <span>Eggs</span>
+                </div>
+
+                <div class="quantity">
+                    <button onclick="javascript:add3()" class="plus-btn" type="button" name="button">
+                        <img src="./../../img/plus.svg" alt="" />
+                    </button>
+                    <input id="t3" type="text" name="name" value="1">
+                    <button onclick="javascript:subtract3()" class="minus-btn" type="button" name="button">
+                        <img src="./../../img/minus.svg" alt="" />
+                    </button>
+                </div>
+
+                <div class="total-price">$549</div>
+            </div>
+
+            <!-- Product #2 -->
+            <div class="item">
+                <div class="buttons">
+                    <span class="delete-btn">
+                        <!-- <img src="./../../img/delete-icn.svg" alt="Eggs" width="100px" height="80%" /> -->
+                    </span>
+                    <!-- <span class="like-btn">
+                        <img src="./../../img/twitter-heart.png" alt="Eggs" width="100px" height="80%" />
+                    </span> -->
+                </div>
+
+                <div class="image">
+                    <img src="./../../img/milk.png" alt="Eggs" width="100px" height="80%" />
+                </div>
+
+                <div class="description">
+                    <span>Whole Milk, 4L</span>
+                    <span>Lactantia</span>
+                </div>
+
+                <div class="quantity">
+                    <button onclick="javascript:add2()" class="plus-btn" type="button" name="button">
+                        <img src="./../../img/plus.svg" alt="" />
+                    </button>
+                    <input id="t2" type="text" name="name" value="1">
+                    <button onclick="javascript:subtract2()" class="minus-btn" type="button" name="button">
+                        <img src="./../../img/minus.svg" alt="" />
+                    </button>
+                </div>
+
+                <div class="total-price">$870</div>
+            </div>
+
+            <!-- Product #3 -->
+            <div class="item">
+                <div class="buttons">
+                    <span class="delete-btn">
+                        <!-- <img src="./../../img/delete-icn.svg" alt="Eggs" width="100px" height="80%" /> -->
+                    </span>
+                    <!-- <span class="like-btn"> -->
+                        <!-- <img src="./../../img/twitter-heart.png" alt="Eggs" width="100px" height="80%" /> -->
+                    <!-- </span> -->
+                </div>
+
+                <div class="image">
+                    <img src="./../../img/c.png" width="100px" height="80%" alt="" />
+                </div>
+
+                <div class="description">
+                    <span>Miniature cookie</span>
+                    <span>packets, 14 pack</span>
+                </div>
+
+                <div class="quantity">
+                    <button onclick="javascript:add()" class="plus-btn" type="button" name="button">
+                        <img src="./../../img/plus.svg" alt="" />
+                    </button>
+                    <input id="t1" type="text" name="name" value="1">
+                    <button onclick="javascript:subtract()" class="minus-btn" type="button" name="button">
+                        <img src="./../../img/minus.svg" alt="" />
+                    </button>
+                </div>
+
+                <div class="total-price">$349</div>
+            </div>
+            </div>
+
+            <script type="text/javascript">
+                
+                function subtract()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t1");
+                var newNumber = parseInt(txtNumber.value) - 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                function add()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t1");
+                var newNumber = parseInt(txtNumber.value) + 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                function subtract2()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t2");
+                var newNumber = parseInt(txtNumber.value) - 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                function add2()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t2");
+                var newNumber = parseInt(txtNumber.value) + 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                function subtract3()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t3");
+                var newNumber = parseInt(txtNumber.value) - 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                function add3()
+                {
+                // e.preventDefault();
+                var txtNumber = document.getElementById("t3");
+                var newNumber = parseInt(txtNumber.value) + 1;
+                txtNumber.value = newNumber;
+                return false;
+                }
+
+                $('.like-btn').on('click', function () {
+                    $(this).toggleClass('is-active');
+                });
+            </script>
+
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <!-- Scripts-->
+            <%- include('layouts/scripts'); -%>
+            <script type="text/javascript">
+                (function(d, t) {
+                    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    v.onload = function() {
+                      window.voiceflow.chat.load({
+                        verify: { projectID: '65219ae48d2bac00071cea19' },
+                        url: 'https://general-runtime.voiceflow.com',
+                        versionID: 'production'
+                      });
+                    }
+                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+                })(document, 'script');
+              </script>
+    </body>
+
+</html>

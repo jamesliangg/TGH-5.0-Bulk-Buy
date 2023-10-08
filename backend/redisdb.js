@@ -11,9 +11,9 @@ export async function redis_get(key, password, host, port) {
         }
     });
     await client.connect();
-    const value = await client.get(key);
+    const response = await client.get(key);
     await client.disconnect();
-    return value;
+    return response;
 }
 
 // https://redis.io/commands/set/
@@ -41,9 +41,9 @@ export async function redis_hGet(key, field, password, host, port) {
         }
     });
     await client.connect();
-    const value = await client.hGet(key, field);
+    const response = await client.hGet(key, field);
     await client.disconnect();
-    return value;
+    return response;
 }
 
 // https://redis.io/commands/hset/
@@ -71,13 +71,13 @@ export async function redis_hGetAll(key, password, host, port) {
         }
     });
     await client.connect();
-    const value = await client.hGetAll(key);
+    const response = await client.hGetAll(key);
     await client.disconnect();
-    return value;
+    return response;
 }
 
 // https://redis.io/commands/hgetall/
-export async function redis_zAdd(key, value, password, host, port) {
+export async function redis_sAdd(key, value, password, host, port) {
     const client = createClient({
         password: password,
         socket: {
@@ -85,9 +85,8 @@ export async function redis_zAdd(key, value, password, host, port) {
             port: port
         }
     });
-    const numOfKeys = Object.keys(value).length
     await client.connect();
-    const response = await client.zAdd(key, numOfKeys, value);
+    const response = await client.sAdd(key, value);
     await client.disconnect();
     return response;
 }
@@ -103,6 +102,36 @@ export async function redis_mSet(value, password, host, port) {
     });
     await client.connect();
     const response = await client.mSet(value);
+    await client.disconnect();
+    return response;
+}
+
+// https://redis.io/commands/lpush/
+export async function redis_lPush(key, value, password, host, port) {
+    const client = createClient({
+        password: password,
+        socket: {
+            host: host,
+            port: port
+        }
+    });
+    await client.connect();
+    const response = await client.lPush(key, value);
+    await client.disconnect();
+    return response;
+}
+
+// https://redis.io/commands/lrange/
+export async function redis_lRange(key, password, host, port) {
+    const client = createClient({
+        password: password,
+        socket: {
+            host: host,
+            port: port
+        }
+    });
+    await client.connect();
+    const response = await client.lRange(key, 0, -1);
     await client.disconnect();
     return response;
 }

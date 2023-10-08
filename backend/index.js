@@ -1,5 +1,5 @@
 import {mongoQueryOne, mongoInsertOne, mongoQueryMultiple, mongoUpdateOne} from "./mongo.js";
-import {redis_get, redis_hSet, redis_hGet, redis_hGetAll, redis_zAdd, redis_mSet} from "./redisdb.js";
+import {redis_get, redis_hSet, redis_hGet, redis_hGetAll, redis_mSet, redis_lPush, redis_lRange} from "./redisdb.js";
 import express from 'express';
 const app = express();
 import bodyParser from "body-parser";
@@ -22,6 +22,10 @@ const ingredientsPort = process.env.INGREDIENTS_REDIS_PORT;
 const quantityPassword = process.env.QUANTITY_REDIS_PASSWORD;
 const quantityHost = process.env.QUANTITY_REDIS_HOST;
 const quantityPort = process.env.QUANTITY_REDIS_PORT;
+
+const pastOrdersPassword = process.env.PASTORDERS_REDIS_PASSWORD;
+const pastOrdersHost = process.env.PASTORDERS_REDIS_HOST;
+const pastOrdersPort = process.env.PASTORDERS_REDIS_PORT;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -167,6 +171,47 @@ app.post('/api/quantity', async function (req, res) {
             try {
                 const item = req.body.item;
                 result = await redis_mSet(item, quantityPassword, quantityHost, quantityPort);
+            }
+            catch(err) {
+                console.log(err.message);
+            }
+            break;
+    }
+
+    response = JSON.stringify({
+        "result": result
+    });
+    console.log(response);
+    res.send(response);
+});
+
+app.post('/api/pastOrders', async function (req, res) {
+    const data = req.body;
+    const action = req.body.action;
+    console.log(req.ip);
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+    console.log(dateTime);
+    console.log('Received data: ', data);
+    let response = "No action received.";
+    let result = "";
+    switch(action) {
+        case("get"):
+            try {
+                const uid = req.body.uid;
+                result = await redis_lRange(uid, pastOrdersPassword, pastOrdersHost, pastOrdersPort)
+            }
+            catch(err) {
+                console.log(err.message);
+            }
+            break;
+        case("set"):
+            try {
+                const uid = req.body.uid;
+                const orders = req.body.orders;
+                result = await redis_lPush(uid, orders, pastOrdersPassword, pastOrdersHost, pastOrdersPort)
             }
             catch(err) {
                 console.log(err.message);

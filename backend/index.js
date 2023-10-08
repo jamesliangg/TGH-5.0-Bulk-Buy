@@ -58,6 +58,7 @@ app.post('/api/auth', async function (req, res) {
                 }
                 else {
                     result = "ERROR: Invalid";
+                    // result = undefined;
                 }
             }
             catch(err) {

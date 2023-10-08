@@ -1,5 +1,14 @@
 import {mongoQueryOne, mongoInsertOne, mongoQueryMultiple, mongoUpdateOne} from "./mongo.js";
-import {redis_get, redis_hSet, redis_hGet, redis_hGetAll, redis_mSet, redis_lPush, redis_lRange} from "./redisdb.js";
+import {
+    redis_get,
+    redis_hSet,
+    redis_hGet,
+    redis_hGetAll,
+    redis_mSet,
+    redis_lPush,
+    redis_lRange,
+    redis_mGet, redis_sAdd, redis_sMembers
+} from "./redisdb.js";
 import express from 'express';
 const app = express();
 import bodyParser from "body-parser";
@@ -169,7 +178,17 @@ app.post('/api/quantity', async function (req, res) {
             break;
         case("set"):
             try {
-                const item = req.body.item;
+                let item = req.body.item;
+                const itemArr = Object.keys(item);
+                const existingItems = await redis_mGet(itemArr, quantityPassword, quantityHost, quantityPort);
+                // console.log(existingItems);
+                // add quantity to existing items
+                for (let i = 0; i < itemArr.length - 1; i++) {
+                    if (existingItems[i] != null) {
+                        item[itemArr[i]] = (parseInt(item[itemArr[i]]) + parseInt(await redis_get(itemArr[i],quantityPassword, quantityHost, quantityPort))).toString();
+                    }
+                }
+                // console.log(item);
                 result = await redis_mSet(item, quantityPassword, quantityHost, quantityPort);
             }
             catch(err) {
@@ -201,7 +220,7 @@ app.post('/api/pastOrders', async function (req, res) {
         case("get"):
             try {
                 const uid = req.body.uid;
-                result = await redis_lRange(uid, pastOrdersPassword, pastOrdersHost, pastOrdersPort)
+                result = await redis_sMembers(uid, pastOrdersPassword, pastOrdersHost, pastOrdersPort);
             }
             catch(err) {
                 console.log(err.message);
@@ -210,8 +229,8 @@ app.post('/api/pastOrders', async function (req, res) {
         case("set"):
             try {
                 const uid = req.body.uid;
-                const orders = req.body.orders;
-                result = await redis_lPush(uid, orders, pastOrdersPassword, pastOrdersHost, pastOrdersPort)
+                let orders = req.body.orders;
+                result = await redis_sAdd(uid, orders, pastOrdersPassword, pastOrdersHost, pastOrdersPort);
             }
             catch(err) {
                 console.log(err.message);

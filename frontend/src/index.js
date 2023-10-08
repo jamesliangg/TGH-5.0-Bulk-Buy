@@ -14,9 +14,9 @@ import AppRouter from './AppRouter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <Provider store={store}>
-    // <PersistGate loading={null} persistor={persistor}>
+  <div>
+    {/* // <PersistGate loading={null} persistor={persistor}> */}
       <AppRouter />
-    // </PersistGate>
-  // </Provider>
+    {/* // </PersistGate> */}
+  </div>
 );

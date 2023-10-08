@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Dashboard from './pages/Dashboard/Dashboard'
+import CheckoutPage from './pages/Checkout/CheckoutPage'
 import LandingPage from './pages/LandingPage/LandingPage'
-import LoginPage from './pages/Login/LoginPage'
-import About from './pages/About/About'
-import Privacy from './pages/Privacy/Privacy'
-
+import Dashboard from './pages/Dashboard/Dashboard'
+import LoginPage from './pages/LoginPage/LoginPage'
+import OrderConf from './pages/OrderConf/OrderConf'
+import SignupPage from './pages/SignupPage/SignupPage'
 
 class AppRouter extends React.Component{
   render(){
@@ -14,11 +14,11 @@ class AppRouter extends React.Component{
         <div>
           <Routes>
             <Route path = "/" element = {<LandingPage />} exact = {true} />
-            <Route path = "/landingpage" element = {<LandingPage />} exact = {true} />
-            <Route path = "/dashboard" element = {<Dashboard />} exact = {true} />
-            <Route path = "/login" element = {<LoginPage />} exact = {true} />
-            <Route path = "/about" element = {<About />} exact = {true} />
-            <Route path = "/privacy" element = {<Privacy />} exact = {true} />
+            <Route path = "/checkout" element = {<CheckoutPage />} />
+            <Route path = "/dashboard" element = {<Dashboard />} />
+            <Route path = "/login" element = {<LoginPage />} />
+            <Route path = "/orderconf" element = {<OrderConf />} />
+            <Route path = "/signup" element = {<SignupPage />} />
           </Routes>
         </div>
       </BrowserRouter>

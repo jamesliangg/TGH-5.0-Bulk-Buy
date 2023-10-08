@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import CheckoutPage from './pages/Checkout/CheckoutPage'
+import CheckoutPage from './pages/Checkout/Checkout'
 import LandingPage from './pages/LandingPage/LandingPage'
 import Dashboard from './pages/Dashboard/Dashboard'
 import LoginPage from './pages/LoginPage/LoginPage'

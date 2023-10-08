@@ -53,8 +53,8 @@ app.post('/api/auth', async function (req, res) {
                 pwd = req.body.pwd;
                 result = await redis_hGet(uid, "pwd", authPassword, authHost, authPort);
                 if (result == pwd) {
-                    // result = await redis_hGet(uid, "name", authPassword, authHost, authPort);
-                    result = uid;
+                    result = await redis_hGet(uid, "name", authPassword, authHost, authPort);
+                    // result = uid;
                 }
                 else {
                     result = "ERROR: Invalid";

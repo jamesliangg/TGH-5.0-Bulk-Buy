@@ -1,12 +1,8 @@
 import { createClient } from 'redis';
 import 'dotenv/config';
 
-const password = process.env.REDIS_PASSWORD;
-const host = process.env.REDIS_HOST;
-const port = process.env.REDIS_PORT;
-
 // https://redis.io/commands/get/
-export async function redis_get(key) {
+export async function redis_get(key, password, host, port) {
     const client = createClient({
         password: password,
         socket: {
@@ -21,7 +17,7 @@ export async function redis_get(key) {
 }
 
 // https://redis.io/commands/set/
-export async function redis_set(key, value) {
+export async function redis_set(key, value, password, host, port) {
     const client = await createClient({
         password: password,
         socket: {
@@ -36,7 +32,7 @@ export async function redis_set(key, value) {
 }
 
 // https://redis.io/commands/hget/
-export async function redis_hGet(key, field) {
+export async function redis_hGet(key, field, password, host, port) {
     const client = createClient({
         password: password,
         socket: {
@@ -51,7 +47,7 @@ export async function redis_hGet(key, field) {
 }
 
 // https://redis.io/commands/hset/
-export async function redis_hSet(key, value) {
+export async function redis_hSet(key, value, password, host, port) {
     const client = await createClient({
         password: password,
         socket: {
@@ -66,7 +62,7 @@ export async function redis_hSet(key, value) {
 }
 
 // https://redis.io/commands/hgetall/
-export async function redis_hGetAll(key) {
+export async function redis_hGetAll(key, password, host, port) {
     const client = createClient({
         password: password,
         socket: {

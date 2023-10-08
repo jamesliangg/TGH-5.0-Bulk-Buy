@@ -1,43 +1,22 @@
-import {mongoQueryOne, mongoInsertOne, mongoQueryMultiple, mongoUpdateOne} from "./mongo.js";
+import {mongoQueryOne, mongoInsertOne, mongoUpdateOne} from "./mongo.js";
 import {
     redis_get,
     redis_hSet,
     redis_hGet,
     redis_hGetAll,
     redis_mSet,
-    redis_lPush,
-    redis_lRange,
     redis_mGet, redis_sAdd, redis_sMembers
 } from "./redisdb.js";
 import express from 'express';
-const app = express();
 import bodyParser from "body-parser";
-import * as path from "path";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+
+const app = express();
 
 const port = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-const authPassword = process.env.AUTH_REDIS_PASSWORD;
-const authHost = process.env.AUTH_REDIS_HOST;
-const authPort = process.env.AUTH_REDIS_PORT;
-
-const ingredientsPassword = process.env.INGREDIENTS_REDIS_PASSWORD;
-const ingredientsHost = process.env.INGREDIENTS_REDIS_HOST;
-const ingredientsPort = process.env.INGREDIENTS_REDIS_PORT;
-
-const quantityPassword = process.env.QUANTITY_REDIS_PASSWORD;
-const quantityHost = process.env.QUANTITY_REDIS_HOST;
-const quantityPort = process.env.QUANTITY_REDIS_PORT;
-
-const pastOrdersPassword = process.env.PASTORDERS_REDIS_PASSWORD;
-const pastOrdersHost = process.env.PASTORDERS_REDIS_HOST;
-const pastOrdersPort = process.env.PASTORDERS_REDIS_PORT;
-
-const requestCollection = process.env.MONGO_COLLECTION_REQUEST;
-const orderCollection = process.env.MONGO_COLLECTION_ORDER;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -51,6 +30,9 @@ app.get('/docs', function(req, res, next) {
 });
 
 app.post('/api/auth', async function (req, res) {
+    const authPassword = process.env.AUTH_REDIS_PASSWORD;
+    const authHost = process.env.AUTH_REDIS_HOST;
+    const authPort = process.env.AUTH_REDIS_PORT;
     const data = req.body;
     let uid = "";
     let pwd = "";
@@ -71,7 +53,8 @@ app.post('/api/auth', async function (req, res) {
                 pwd = req.body.pwd;
                 result = await redis_hGet(uid, "pwd", authPassword, authHost, authPort);
                 if (result == pwd) {
-                    result = await redis_hGet(uid, "name", authPassword, authHost, authPort);
+                    // result = await redis_hGet(uid, "name", authPassword, authHost, authPort);
+                    result = uid;
                 }
                 else {
                     result = "ERROR: Invalid";
@@ -107,6 +90,9 @@ app.post('/api/auth', async function (req, res) {
 });
 
 app.post('/api/ingredients', async function (req, res) {
+    const ingredientsPassword = process.env.INGREDIENTS_REDIS_PASSWORD;
+    const ingredientsHost = process.env.INGREDIENTS_REDIS_HOST;
+    const ingredientsPort = process.env.INGREDIENTS_REDIS_PORT;
     const port = "10543";
     const data = req.body;
     const action = req.body.action;
@@ -158,6 +144,9 @@ app.post('/api/ingredients', async function (req, res) {
 });
 
 app.post('/api/quantity', async function (req, res) {
+    const quantityPassword = process.env.QUANTITY_REDIS_PASSWORD;
+    const quantityHost = process.env.QUANTITY_REDIS_HOST;
+    const quantityPort = process.env.QUANTITY_REDIS_PORT;
     const data = req.body;
     const action = req.body.action;
     console.log(req.ip);
@@ -208,6 +197,9 @@ app.post('/api/quantity', async function (req, res) {
 });
 
 app.post('/api/pastOrders', async function (req, res) {
+    const pastOrdersPassword = process.env.PASTORDERS_REDIS_PASSWORD;
+    const pastOrdersHost = process.env.PASTORDERS_REDIS_HOST;
+    const pastOrdersPort = process.env.PASTORDERS_REDIS_PORT;
     const data = req.body;
     const action = req.body.action;
     console.log(req.ip);
@@ -249,6 +241,7 @@ app.post('/api/pastOrders', async function (req, res) {
 });
 
 app.post("/api/request", async function (req, res) {
+    const requestCollection = process.env.MONGO_COLLECTION_REQUEST;
     const data = req.body;
     const action = req.body.action;
     console.log(req.ip);
@@ -295,6 +288,7 @@ app.post("/api/request", async function (req, res) {
 });
 
 app.post("/api/order", async function (req, res) {
+    const orderCollection = process.env.MONGO_COLLECTION_ORDER;
     const data = req.body;
     const action = req.body.action;
     console.log(req.ip);

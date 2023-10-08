@@ -3,14 +3,14 @@ import 'dotenv/config';
 
 const uri = process.env.MONGO_CONNECT_STRING;
 const mongoDatabase = process.env.MONGO_DATABASE;
-const mongoCollection = process.env.MONGO_COLLECTION;
+// const mongoCollection = process.env.MONGO_COLLECTION;
 
-export async function mongoQueryOne(queryKey, queryValue) {
+export async function mongoQueryOne(queryKey, queryValue, requestCollection) {
     const client = new MongoClient(uri);
     let queryResult = "Error in query";
     try {
         const database = client.db(mongoDatabase);
-        const collection = database.collection(mongoCollection);
+        const collection = database.collection(requestCollection);
 
         const query = { [queryKey]: queryValue };
         queryResult = await collection.findOne(query);
@@ -25,7 +25,7 @@ export async function mongoQueryOne(queryKey, queryValue) {
     }
 }
 
-export async function mongoQueryMultiple(queryArray) {
+export async function mongoQueryMultiple(queryArray, requestCollection) {
     const client = new MongoClient(uri);
     let queryResult = "Error in query";
     try {
@@ -36,7 +36,7 @@ export async function mongoQueryMultiple(queryArray) {
             Object.assign(queryObject, {[queryArray[i][0]]: {$gte : queryArray[i][1], $lte : queryArray[i][2]}});
         }
 
-        const collection = database.collection(mongoCollection);
+        const collection = database.collection(requestCollection);
         queryResult = await collection.find(queryObject).toArray();
 
         // console.log(queryResult);
@@ -49,12 +49,12 @@ export async function mongoQueryMultiple(queryArray) {
     }
 }
 
-export async function mongoInsertOne(input) {
+export async function mongoInsertOne(input, requestCollection) {
     const client = new MongoClient(uri);
     let insertResult = "Error in insert";
     try {
         const database = client.db(mongoDatabase);
-        const collection = database.collection(mongoCollection);
+        const collection = database.collection(requestCollection);
 
         let insert = {};
         Object.assign(insert, input);
@@ -71,12 +71,12 @@ export async function mongoInsertOne(input) {
     }
 }
 
-export async function mongoUpdateOne(queryKey, queryValue, input) {
+export async function mongoUpdateOne(queryKey, queryValue, input, requestCollection) {
     const client = new MongoClient(uri);
     let updateResult = "Error in update";
     try {
         const database = client.db(mongoDatabase);
-        const collection = database.collection(mongoCollection);
+        const collection = database.collection(requestCollection);
 
         let insert = {};
         Object.assign(insert, input);

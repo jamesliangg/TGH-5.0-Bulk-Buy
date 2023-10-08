@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import "dotenv/config";
 
+MONGO_CONNECT_STRING="mongodb+srv://shubhamkarande13:LvSiFtut621dU6R9@cluster0.3fkmblf.mongodb.net/?retryWrites=true&w=majority"
 const uri = process.env.MONGO_CONNECT_STRING;
 const mongoDatabase = process.env.MONGO_DATABASE;
 //const mongoCollection = process.env.MONGO_COLLECTION2;

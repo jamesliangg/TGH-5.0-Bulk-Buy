@@ -1,5 +1,5 @@
 import React from 'react'
-import Intentful from './../Images/Intentful.png'
+// import Intentful from './../Images/Intentful.png'
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {

@@ -75,3 +75,34 @@ export async function redis_hGetAll(key, password, host, port) {
     await client.disconnect();
     return value;
 }
+
+// https://redis.io/commands/hgetall/
+export async function redis_zAdd(key, value, password, host, port) {
+    const client = createClient({
+        password: password,
+        socket: {
+            host: host,
+            port: port
+        }
+    });
+    const numOfKeys = Object.keys(value).length
+    await client.connect();
+    const response = await client.zAdd(key, numOfKeys, value);
+    await client.disconnect();
+    return response;
+}
+
+// https://redis.io/commands/mset/
+export async function redis_mSet(value, password, host, port) {
+    const client = await createClient({
+        password: password,
+        socket: {
+            host: host,
+            port: port
+        }
+    });
+    await client.connect();
+    const response = await client.mSet(value);
+    await client.disconnect();
+    return response;
+}

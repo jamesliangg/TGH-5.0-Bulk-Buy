@@ -1,5 +1,5 @@
 import {mongoQueryOne, mongoInsertOne, mongoQueryMultiple, mongoUpdateOne} from "./mongo.js";
-import {redis_get, redis_hSet, redis_hGet, redis_hGetAll} from "./redisdb.js";
+import {redis_get, redis_hSet, redis_hGet, redis_hGetAll, redis_zAdd, redis_mSet} from "./redisdb.js";
 import express from 'express';
 const app = express();
 import bodyParser from "body-parser";
@@ -18,6 +18,10 @@ const authPort = process.env.AUTH_REDIS_PORT;
 const ingredientsPassword = process.env.INGREDIENTS_REDIS_PASSWORD;
 const ingredientsHost = process.env.INGREDIENTS_REDIS_HOST;
 const ingredientsPort = process.env.INGREDIENTS_REDIS_PORT;
+
+const quantityPassword = process.env.QUANTITY_REDIS_PASSWORD;
+const quantityHost = process.env.QUANTITY_REDIS_HOST;
+const quantityPort = process.env.QUANTITY_REDIS_PORT;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -152,8 +156,8 @@ app.post('/api/quantity', async function (req, res) {
     switch(action) {
         case("get"):
             try {
-                const ingredient = req.body.ingredient;
-                result = await redis_hGetAll(ingredient);
+                const item = req.body.item;
+                result = await redis_get(item, quantityPassword, quantityHost, quantityPort)
             }
             catch(err) {
                 console.log(err.message);
@@ -161,18 +165,8 @@ app.post('/api/quantity', async function (req, res) {
             break;
         case("set"):
             try {
-                const ingredient = req.body.ingredient;
-                const price = req.body.price;
-                const unit = req.body.unit;
-                const threshold = req.body.threshold;
-                const retailer = req.body.retailer;
-                const value = {
-                    price: price,
-                    unit: unit,
-                    threshold: threshold,
-                    retailer: retailer
-                }
-                result = await redis_hSet(ingredient, value);
+                const item = req.body.item;
+                result = await redis_mSet(item, quantityPassword, quantityHost, quantityPort);
             }
             catch(err) {
                 console.log(err.message);
